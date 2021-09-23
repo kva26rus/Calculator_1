@@ -1,9 +1,9 @@
 package Calculator_1;
 
 public class Converter {
-    private static final String [] rome = {"X", "IX", "V", "IV", "I"};
+    private static final String [] rome = {"C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
 
-    private static final int [] arab = {10, 9, 5, 4, 1};
+    private static final int [] arab = {100, 90, 50, 40, 10, 9, 5, 4, 1};
 
     public static int rome_to_arab(String str) {
         int value = 0;

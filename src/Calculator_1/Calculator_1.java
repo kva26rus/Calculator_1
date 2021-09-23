@@ -33,46 +33,59 @@ public class Calculator_1 {
             int value1;
             int value2;
             try {
+                Checkon.SameTipeEx(parsed_input[0], parsed_input[2]);
+            } catch (MyException e) {
+                System.out.print(e.getMessage());
+                System.exit(0);
+            }
+            try {
                 Integer.parseInt(parsed_input[0]);
                 Integer.parseInt(parsed_input[2]);
+
+                try {
+                    Checkon.More10Ex(Integer.parseInt(parsed_input[0]), Integer.parseInt(parsed_input[2]));
+                } catch (MyException e) {
+                    System.out.print(e.getMessage());
+                    System.exit(0);
+                }
             } catch (NumberFormatException e) {
                 arabian = false;
+                try {
+                    Checkon.More10Ex(rome_to_arab(parsed_input[0]), rome_to_arab(parsed_input[2]));
+                }catch (MyException e1) {
+                    System.out.print(e1.getMessage());
+                    System.exit(0);
+                }
+                try {
+                    Checkon.UpperCaseEx(parsed_input[0], parsed_input[2]);
+                } catch (Exception ex) {
+                    System.out.print(ex.getMessage());
+                    System.exit(0);
+                }
             }
+
 
             if (arabian) {
                 value1 = Integer.parseInt(parsed_input[0]);
                 value2 = Integer.parseInt(parsed_input[2]);
-                if (!Exceptions.MoreThen10(value1, value2)) {
-                    System.out.print("Ответ: " + Operation.Operation(value1, value2, operation));
-                    System.out.println();
-                    System.out.print("Введите следующее выражение: ");
-                    input = value.nextLine();
-                } else if (Exceptions.MoreThen10(value1, value2)) {
-                    System.out.print("Можно вводить числа до 10 включительно!");
-                    System.exit(0);
-                }
-
-
+                    System.out.print("Ответ: " + Operations.operation(value1, value2, operation));
             } else {
                 int value1Rome = rome_to_arab(parsed_input[0]);
                 int value2Rome = rome_to_arab(parsed_input[2]);
-                if (!Exceptions.MoreThen10(value1Rome, value2Rome)) {
-                    if (!arabian && (value1Rome - value2Rome) < 0) {
-                        System.out.print("Ответ: -" + Converter.arab_to_rome(Operation.Operation(value1Rome, value2Rome, operation)));
-                    }else if (!arabian && Operation.Operation(value1Rome, value2Rome, operation) == 0) {
+                int result = Operations.operation(value1Rome, value2Rome, operation);
+                    if (result < 0) {
+                        System.out.print("Ответ: -" + Converter.arab_to_rome(result * -1));
+                    }else if (result == 0) {
                         System.out.print("Null");
                     } else {
-                    System.out.print("Ответ: " + Converter.arab_to_rome(Operation.Operation(value1Rome, value2Rome, operation)));
+                    System.out.print("Ответ: " + Converter.arab_to_rome(result));
                     }
                 arabian = true;
-                System.out.println();
-                System.out.print("Введите следующее выражение: ");
-                input = value.nextLine();
-            } else if (Exceptions.MoreThen10(value1Rome, value2Rome)) {
-                    System.out.print("Можно вводить числа до 10 включительно!");
-                    System.exit(0);
-                }
+
             }
+            System.out.println();
+            System.out.print("Введите следующее выражение: ");
+            input = value.nextLine();
         }
         System.out.println("Работа завершена");
     }

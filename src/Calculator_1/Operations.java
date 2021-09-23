@@ -1,7 +1,7 @@
 package Calculator_1;
 
-public class Operation {
-    public static int Operation(int value1, int value2, String symbol) {
+public class Operations {
+    public static int operation(int value1, int value2, String symbol) {
         int result = 0;
 
         switch (symbol) {
@@ -10,10 +10,10 @@ public class Operation {
                 return result;
             case "-":
                 result = value1 - value2;
-                if (result < 0 && !Calculator_1.arabian) {
+                /*if (result < 0 && !Calculator_1.arabian) {
 
                     result *= -1;
-                }
+                }*/
                     return result;
             case "/":
             case ":":
